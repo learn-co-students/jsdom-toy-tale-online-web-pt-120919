@@ -9,7 +9,7 @@ addBtn.addEventListener("click", () => {
       toyForm.style.display = "block";
       toyForm.addEventListener("submit", function(event){
         event.preventDefault()
-        postToyData()          
+        postToyData(event.target)          
       })
     } else {
       toyForm.style.display = "none";
@@ -39,7 +39,11 @@ addBtn.addEventListener("click", () => {
       image.src = toy["image"]
       button.className = "like-btn";
       button.innerHTML = "Like"
-      button.addEventListener("click", addLikes)
+      button.addEventListener("click", function(e){
+      fetch("http://localhost:3000/toys")
+      .then((response) => response.json())
+      .then((json) => addLikes(json,e))
+      })
       likes.innerHTML = `${toy["likes"]} Likes`
       
       collection.append(card)
@@ -48,6 +52,7 @@ addBtn.addEventListener("click", () => {
 
 
 function postToyData(data){
+
 fetch("http://localhost:3000/toys", {
   method:"POST",
   headers: {
@@ -55,22 +60,24 @@ fetch("http://localhost:3000/toys", {
   "Accept":"application/json"
 },
 body: JSON.stringify({
-  name: "data.name.value",
-  image: "data.image.value",
+  name: `${data[0].value}`,
+  image: `${data[1].value}`,
   likes: 0
 }) 
 })
   .then((response) => response.json())
   .then((object) => {
-    console.log(object)
+    renderToys(object)
   })
 }
 
-function addLikes(e){
+function addLikes(json,e){
   e.preventDefault()
   let add = parseInt(e.target.previousElementSibling.innerText) + 1
-  
-  fetch(`http://localhost:3000/toys/${e.target.id}`, {
+  let toy = e.target.parentElement
+  let toyTitle= toy.childNodes[0].innerHTML
+  let foundToy = json.find((toy)=>toy.name === toyTitle)
+  fetch(`http://localhost:3000/toys/${foundToy.id}`, {
   method : "PATCH",
   headers: {
   "Content-Type": "application/json",
