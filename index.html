@@ -7,15 +7,13 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+
     <div id="toy-header">
-      <img
-        src="https://fontmeme.com/permalink/180719/67429e6afec53d21d64643101c43f029.png"
-        alt="toy-header"
-      />
+      <img src="https://fontmeme.com/permalink/180719/67429e6afec53d21d64643101c43f029.png" alt="toy-header"/>
     </div>
 
     <div class="container">
-      <form class="add-toy-form">
+      <form id="add-toy-form">
         <h3>Create a toy!</h3>
 
         <input
@@ -24,6 +22,7 @@
           value=""
           placeholder="Enter a toy's name..."
           class="input-text"
+          id="name"
         />
         <br />
         <input
@@ -32,6 +31,7 @@
           value=""
           placeholder="Enter a toy's image URL..."
           class="input-text"
+          id="image"
         />
         <br />
         <input
