@@ -1,10 +1,12 @@
 let addToy = false; 
 // default setting for toggle
 // starts false
-
+// ----------------------
+// IF YOU USE DEFER IN HTML YOU DO NOT NEED TO DOMCONTENTLOADED
 // document.addEventListener("DOMContentLoaded", () => {
-
+  // put everything in here if you do not use defer in html
 // }) 
+// ------------------------------
 // this waits till the dom content has loaded
   const toyCollection = document.getElementById('toy-collection')
   // find the toy collection in DOM
@@ -36,9 +38,10 @@ let addToy = false;
     e.preventDefault()
     const toyName = e.target.name.value
     const toyImage = e.target.image.value
+    
     console.log(toyName)
     fetch('http://localhost:3000/toys',{
-      method: 'POST',
+      method: 'POST', 
       headers:{
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -52,9 +55,10 @@ let addToy = false;
     .then(response => response.json())
     .then(newToy => {
       //fetch updated database now you have to update the DOM
-      // have to convert new toy from JSON to HTML in order to add to the DOM
+      // have to convert new toy from JSON to HTML in order to add to the DOM (newToyHTML)
       // use += instead of = so it doesn't over ride everything instead it adds it
-      let newToyHTML = `<div class="card">
+      let newToyHTML = 
+      `<div class="card">
       <h2>${newToy.name}</h2>
       <img src=${newToy.image} class="toy-avatar" />
       <p>${newToy.likes} Likes </p>
