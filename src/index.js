@@ -1,15 +1,23 @@
-let addToy = false;
-
+let addToy = false; 
+// default setting for toggle
 // starts false
-document.addEventListener("DOMContentLoaded", () => {
+
+// document.addEventListener("DOMContentLoaded", () => {
+
+// }) 
+// this waits till the dom content has loaded
   const toyCollection = document.getElementById('toy-collection')
+  // find the toy collection in DOM
   fetch(`http://localhost:3000/toys`)
-  .then(response => response.json())
-  .then(toys => {
+  .then(response => response.json()) // parses response to json
+  .then(toys => { // toys = parsed toys data
+    // take my toys array make HTML with them in ORDER TO ADD THEM TO THE DOM
+    // map does this for us immediatly transforms them into HTML
     console.log(toys)
-    let toysHTML = toys.map(function(toy){
+    let toysHTML = toys.map(function(toy){ 
+      // save it as a variable(toyHTML) so you can console log it
       return `<div class="card">
-      <h2>${toy.name}</h2>
+      <h2>${toy.name}</h2> 
       <img src=${toy.image} class="toy-avatar" />
       <p>${toy.likes} Likes </p>
       <button data-id='${toy.id}' class="like-btn">Like <3</button>
@@ -17,14 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>`
     })
     toyCollection.innerHTML = toysHTML.join('')
+    // add the join to remove the commas
+    // if there was already information already inside you would 
+    // need to += instead of equals so it doesn't override previous data
   })
-  const addBtn = document.querySelector("#new-toy-btn");
-  const toyFormContainer = document.querySelector(".container");
+  const addBtn = document.querySelector("#new-toy-btn"); // given code
+  const toyFormContainer = document.querySelector(".container"); // given code
+  
   toyFormContainer.addEventListener('submit',function(e){
     e.preventDefault()
     const toyName = e.target.name.value
     const toyImage = e.target.image.value
-    
+    console.log(toyName)
     fetch('http://localhost:3000/toys',{
       method: 'POST',
       headers:{
@@ -82,15 +94,17 @@ toyCollection.addEventListener('click',(e)=>{
     })
     .then(response => {
       e.target.parentElement.remove()
+      
     })
   }
 })
 
 
-
+// GIVEN CODE----------------------------------
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
-    addToy = !addToy;
+    addToy = !addToy; 
+    // whenever I click it's switching between true and false
     // toggle if clicked turns true
     if (addToy) {
       toyFormContainer.style.display = "block";
@@ -99,4 +113,4 @@ toyCollection.addEventListener('click',(e)=>{
       toyFormContainer.style.display = "none";
     }
   });
-});
+// });

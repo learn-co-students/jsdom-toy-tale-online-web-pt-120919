@@ -3,7 +3,7 @@
 You've got a friend in need! Your friend Andy recently misplaced all their toys!
 Help Andy recover their toys and get the toys back in the toy collection.
 
-## Create Your Server
+## 1 Create Your Server (already done for us)
 
 All of the toy data is stored in the `db.json` file. You'll want to access this
 data using a JSON server. In order to do this, run the following two commands:
@@ -15,7 +15,7 @@ This will create a server storing all of our lost toy data with restful routes
 at `http://localhost:3000/toys`. You can also check out
 `http://localhost:3000/toys/:id`
 
-## Fetch Andy's Toys
+## 2 Fetch Andy's Toys
 
 On the `index.html` page, there is a `div` with the `id` "toy-collection."
 
@@ -33,7 +33,7 @@ Each card should have the following child elements:
   * `button` tag with a class "like-btn"
 
 After all of that, the toy card should resemble:
-
+WHAT NEEDS TO GO IN THE DIV!!
 ```html
   <div class="card">
     <h2>Woody</h2>
